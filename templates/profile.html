@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block body %}
+
+<div class="container w-50 p-3 my-3 border">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <img src='{{user_profile.profile_img.url}}' alt='user_image' height="100" width="100"
+                    class='border rounded-circle'>
+                <h1 class="text-primary mb-3">{{user_profile.user}}</h1>
+
+                <div>
+                    <form action="{% url 'follow' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{request.user.username}}" name="follower"> {% comment %} the user
+                        that is logged in {% endcomment %}
+                        <input type="hidden" value="{{user_profile.user}}" name='user'>
+                        {% if user_profile.user == request.user %}
+                        <a href='{% url 'settings' %}' class="text-decoration-none btn btn-info fs-5 mb-4">Settings</a>
+                        {% else %}
+                        <button type="submit" class="btn btn-dark mb-4">{{button_text}}</button>
+                        {% endif %}
+                    </form>
+                </div>
+
+                <div class=" mb-3">
+                    <span class="fs-5 text-primary" style="margin-right: 30px;">Posts: {{user_post_length}}</span>
+                    <span class="fs-5 text-primary" style="margin-right: 30px;">Followers: {{user_followers}}</span>
+                    <span class="fs-5 text-primary">Following: {{user_following}}</span>
+                </div>
+                
+            </div>
+        </div>
+        <h3>Bio</h3>
+        <hr> {{user_profile.bio}}
+        <hr class="mb-4">
+        <h3>Location: <span class="text-danger">{{user_profile.location}}</span></h3>
+    </div>
+</div>
+
+
+
+{% endblock body %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}SIgnIn{% endblock title %}
+
+{% block body %}
+
+<div class="container text-danger text-center">
+    {% for message in messages %} {{message}} {% endfor %}
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="w-50 p-3 bg-dark text-white border rounded-5 shadow-lg my-5">
+        <!-- to keep the content in block not inline -->
+        <h1 class="text-center mb-4">Sign-up</h1>
+        <form action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="Username" class="form-label">Username</label>
+                <input type="text" name='username' class="form-control" id="Username" placeholder="Enter username"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" name='email' class="form-control" id="email" placeholder="Enter your e-mail"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="password" vclass="form-label">Password</label>
+                <input type="password" name='password' class="form-control" id="password" placeholder="Creater password"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="c_pass" class="form-label">Re-enter password</label>
+                <input type="password" name='c_pass' class="form-control" id="c_pass" placeholder="Enter password again"
+                    required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Sign up</button> <br>
+            Already have an account? <a href="{% url 'login' %}">Log In</a>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

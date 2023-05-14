@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Account-settings{% endblock title %}
+
+{% block body %}
+
+<h1 class="position-fixed text-success-emphasis">{{request.user.username}}</h1> {% comment "request.user will do the same thing" %}{% endcomment %}
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="w-50 p-3 bg-info text-black border rounded-5 shadow-lg my-5">
+        <!-- to keep the content in block not inline -->
+        <h1 class="text-center mb-4">Account Settings</h1>
+
+        <form action="{% url 'settings' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+            <img src="{{loggedIn_user.profile_img.url}}" alt="profile_image" height='100' width='100'> <br>
+            <label for="image" class="form-label">Upload profile image</label>
+            <input type="file" name='image' class="form-control" id="image">
+        </div>
+        <div class="mb-4">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea class="form-control" id="bio" name="bio" rows="3" >{{loggedIn_user.bio}}</textarea>
+        </div>
+        <div class="mb-4">
+            <label for="location" vclass="form-label">Location</label>
+            <input type="text" name='location' class="form-control" id="Location" value='{{loggedIn_user.location}}' placeholder="Your location">
+        </div>
+        <button type="submit" class="btn btn-success mb-3">Save</button> <br>
+        </form>
+
+    </div>
+</div>
+
+{% endblock body %}

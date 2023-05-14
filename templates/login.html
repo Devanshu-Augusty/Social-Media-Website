@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}LogIn{% endblock title %}
+
+{% block body %}
+
+<div class="container text-danger text-center">
+    {% for message in messages %} {{message}} {% endfor %}
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="w-50 p-3 bg-dark text-white border rounded-5 shadow-lg my-5">
+        <!-- to keep the content in block not inline -->
+        <h1 class="text-center mb-4">Login-up</h1>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="Username" class="form-label">Username</label>
+                <input type="text" name='username' class="form-control" id="Username" placeholder="Enter username"
+                    required>
+            </div>
+            <div class="mb-4">
+                <label for="password" vclass="form-label">Password</label>
+                <input type="password" name='password' class="form-control" id="password" placeholder="Creater password"
+                    required>
+            </div>
+            <button type="submit" class="btn btn-success mb-3">Log In</button> <br>
+            Do not have an account? <a href="{% url 'signup' %}">Create account</a>
+        </form>
+    </div>
+</div>
+{% endblock body %}

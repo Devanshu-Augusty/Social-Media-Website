@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock title %} Search
+
+{% block body %}
+
+{% for users in profile_list %}
+
+<div class="my-4 d-flex justify-content-center">
+    <a href="{% url 'profile' users.user %}" class="w-25 p-3 border bg-dark text-decoration-none text-center">
+        <div>
+            <img src="{{users.profile_img.url}}" alt="user_image" class="border rounded-circle" height="100"
+                width="100">
+            <h2>{{users.user}}</h2>
+            <h5 class="text-danger"> {{users.location}}</h5>
+        </div>
+    </a>
+</div>
+
+{% endfor %}
+
+{% endblock body %}
